@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic.base import RedirectView
+
+
+def is_authenticated(request):
+    if request.user.is_authenticated:
+        return HttpResponse('OK')
+    else:
+        return HttpResponseForbidden()
+
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
+    url(r'^is_authenticated?$', is_authenticated),
     url(r'', include('mama_cas.urls')),
     url(r'^admin/', include('loginas.urls')),
     url(r'^admin/', admin.site.urls),
