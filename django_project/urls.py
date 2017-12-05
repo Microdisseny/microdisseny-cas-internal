@@ -20,5 +20,6 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
     url(r'', include('mama_cas.urls')),
+    url(r'^admin/', include('loginas.urls')),
     url(r'^admin/', admin.site.urls),
 ]
