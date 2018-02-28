@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     # 'fancybox',
     # 'import_export',
     'loginas',
-    # 'oauth2_provider',
+    'oauth2_provider',
     # 'rest_framework',
     'theme_microdisseny',
 
@@ -202,20 +202,20 @@ AUTHENTICATION_BACKENDS = [
 
 
 # oauth-toolkit
-# AUTHENTICATION_BACKENDS = (
-#     'oauth2_provider.backends.OAuth2Backend',
-#     # Uncomment following if you want to access the admin
-#     'django.contrib.auth.backends.ModelBackend'
-# )
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    # Uncomment following if you want to access the admin
+    'django.contrib.auth.backends.ModelBackend'
+)
 
-# index = MIDDLEWARE.index('django.contrib.auth.middleware.'
-#                          'AuthenticationMiddleware')
-# MIDDLEWARE.insert(index + 1,
-#                   'oauth2_provider.middleware.OAuth2TokenMiddleware')
+index = MIDDLEWARE.index('django.contrib.auth.middleware.'
+                         'AuthenticationMiddleware')
+MIDDLEWARE.insert(index + 1,
+                  'oauth2_provider.middleware.OAuth2TokenMiddleware')
 
-# OAUTH2_PROVIDER = {
-#     'ACCESS_TOKEN_EXPIRE_SECONDS': 60 * 60 * 24 * 365 * 10,
-# }
+OAUTH2_PROVIDER = {
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 60 * 60 * 24 * 6,
+}
 
 
 # rest-framework
