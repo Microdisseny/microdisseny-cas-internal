@@ -41,7 +41,8 @@ urlpatterns = [
 
     # oauth-toolkit
     # auth urls only
-    url(r'^o/', include(oauth2_endpoint_views, namespace="oauth2_provider")),
+    url(r'^o/', include((oauth2_endpoint_views, 'oauth2_provider'),
+                        namespace='oauth2_provider')),
 
     url(r'^is_authenticated?$', is_authenticated),
     url(r'', include('mama_cas.urls')),
