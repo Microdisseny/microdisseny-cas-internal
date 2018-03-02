@@ -26,6 +26,8 @@ oauth2_endpoint_views = [
     url(r'^token/$', oauth2_views.TokenView.as_view(), name="token"),
     url(r'^revoke-token/$', oauth2_views.RevokeTokenView.as_view(),
         name="revoke-token"),
+    url(r'^introspect/$', oauth2_views.IntrospectTokenView.as_view(),
+        name="introspect"),
 ]
 
 

@@ -212,6 +212,12 @@ MIDDLEWARE.insert(index + 1,
                   'oauth2_provider.middleware.OAuth2TokenMiddleware')
 
 OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'read': 'Read scope',
+        'write': 'Write scope',
+        # 'introspection': 'Introspect token scope',
+    },
+    'DEFAULT_SCOPES': ['read', 'write'],
     'ACCESS_TOKEN_EXPIRE_SECONDS': 60 * 60 * 24 * 6,
 }
 
