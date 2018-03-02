@@ -19,6 +19,8 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic.base import RedirectView
 import oauth2_provider.views as oauth2_views
 
+from . import views
+
 # OAuth2 provider endpoints
 oauth2_endpoint_views = [
     url(r'^authorize/$', oauth2_views.AuthorizationView.as_view(),
@@ -47,6 +49,7 @@ urlpatterns = [
                         namespace='oauth2_provider')),
 
     url(r'^is_authenticated?$', is_authenticated),
+    url(r'^profile/$', views.ProfileView.as_view()),
     url(r'', include('mama_cas.urls')),
     url(r'^admin/', include('loginas.urls')),
     url(r'^admin/', admin.site.urls),
