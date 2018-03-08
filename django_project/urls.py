@@ -13,9 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import os
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse, HttpResponseForbidden
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
 import oauth2_provider.views as oauth2_views
 
@@ -51,6 +55,13 @@ def is_authenticated(request):
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
+
+    url(r'^accounts/login/$',
+        LoginView.as_view(template_name='admin/login.html'),
+        name='login'),
+    url(r'^accounts/logout/$',
+        LogoutView.as_view(next_page=reverse_lazy('login')),
+        name='logout'),
 
     # oauth-toolkit
     # auth urls only
