@@ -53,11 +53,15 @@ def is_authenticated(request):
         return HttpResponseForbidden()
 
 
+class RedirectLoginView(LoginView):
+    redirect_authenticated_user = True
+
+
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
 
     url(r'^accounts/login/$',
-        LoginView.as_view(template_name='admin/login.html'),
+        RedirectLoginView.as_view(template_name='admin/login.html'),
         name='login'),
     url(r'^accounts/logout/$',
         LogoutView.as_view(next_page=reverse_lazy('login')),
