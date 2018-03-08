@@ -21,6 +21,15 @@ import oauth2_provider.views as oauth2_views
 
 from . import views
 
+
+admin.site.site_header = os.getenv('ADMIN_SITE_HEADER',
+                                   _('Microdisseny Internal CAS '
+                                     'Administration'))
+admin.site.site_title = os.getenv('ADMIN_SITE_TITLE',
+                                  _('Microdisseny Internal CAS'))
+admin.site.index_title = os.getenv('ADMIN_INDEX_TITLE',
+                                   _('Site administration'))
+
 # OAuth2 provider endpoints
 oauth2_endpoint_views = [
     url(r'^authorize/$', oauth2_views.AuthorizationView.as_view(),
