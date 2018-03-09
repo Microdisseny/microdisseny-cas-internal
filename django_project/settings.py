@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'mama_cas',
 
     # vendor apps
-    # 'corsheaders',
+    'corsheaders',
     # 'easy_thumbnails',
     # 'fancybox',
     # 'import_export',
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # cors headers
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -191,6 +191,12 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+# corsheaders
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = (
+#     'www.example.com',
+# )
+# CORS_ALLOW_CREDENTIALS = True
 
 # easy-thumbnails
 # THUMBNAIL_BASEDIR = 'thumbs'
