@@ -23,6 +23,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
 import oauth2_provider.views as oauth2_views
 
+from mama_cas.views import LoginView
+
 from . import views
 
 
@@ -59,7 +61,7 @@ class RedirectLoginView(LoginView):
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
-
+    url(r'^external_login?$', LoginView.as_view(), name='cas_external_login'),
     url(r'^accounts/login/$',
         RedirectLoginView.as_view(template_name='admin/login.html'),
         name='login'),
