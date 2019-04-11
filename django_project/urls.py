@@ -14,25 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 import os
+from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import RedirectView
 import oauth2_provider.views as oauth2_views
 
 from . import views
 
 
-admin.site.site_header = os.getenv('ADMIN_SITE_HEADER',
-                                   _('Microdisseny Internal CAS '
-                                     'Administration'))
-admin.site.site_title = os.getenv('ADMIN_SITE_TITLE',
-                                  _('Microdisseny Internal CAS'))
-admin.site.index_title = os.getenv('ADMIN_INDEX_TITLE',
-                                   _('Site administration'))
+admin.site.site_header = settings.ADMIN_SITE_HEADER
+admin.site.site_title = settings.ADMIN_SITE_TITLE
+admin.site.index_title = settings.ADMIN_INDEX_TITLE
 
 # OAuth2 provider endpoints
 oauth2_endpoint_views = [
@@ -53,17 +49,13 @@ def is_authenticated(request):
         return HttpResponseForbidden()
 
 
-class RedirectLoginView(LoginView):
-    redirect_authenticated_user = True
-
-
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
     url(r'^external_login?$',
-        RedirectLoginView.as_view(template_name='admin/login.html'),
+        views.RedirectLoginView.as_view(),
         name='cas_external_login'),
     url(r'^accounts/login/$',
-        RedirectLoginView.as_view(template_name='admin/login.html'),
+        views.RedirectLoginView.as_view(),
         name='login'),
     url(r'^accounts/logout/$',
         LogoutView.as_view(next_page=reverse_lazy('login')),
