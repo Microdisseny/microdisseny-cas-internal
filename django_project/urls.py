@@ -21,6 +21,7 @@ from django.contrib.auth.views import LogoutView
 from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.views.generic.base import RedirectView
+from mama_cas.views import LoginView as CASLoginView
 import oauth2_provider.views as oauth2_views
 
 from . import views
@@ -51,9 +52,12 @@ def is_authenticated(request):
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
+    url(r'^cas_external_login?$',
+        CASLoginView.as_view(),
+        name='cas_external_login'),
     url(r'^external_login?$',
         views.RedirectLoginView.as_view(),
-        name='cas_external_login'),
+        name='external_login'),
     url(r'^accounts/login/$',
         views.RedirectLoginView.as_view(),
         name='login'),
