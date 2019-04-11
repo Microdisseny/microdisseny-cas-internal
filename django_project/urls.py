@@ -59,7 +59,9 @@ class RedirectLoginView(LoginView):
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='login'), name='redirect-to-login'),
-
+    url(r'^external_login?$',
+        RedirectLoginView.as_view(template_name='admin/login.html'),
+        name='cas_external_login'),
     url(r'^accounts/login/$',
         RedirectLoginView.as_view(template_name='admin/login.html'),
         name='login'),
