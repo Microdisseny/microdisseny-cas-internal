@@ -1,7 +1,6 @@
 from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 from django.views.generic import TemplateView
 
 
@@ -14,10 +13,12 @@ class RedirectLoginView(LoginView):
     }
 
 
-class ProfileView(LoginRequiredMixin, TemplateView):
-
+class ProfileView(TemplateView):
     def get(self, request, *args, **kwargs):
         user = request.user
-        return JsonResponse({
-            'username': user.username,
-        })
+        if user.is_authenticated:
+            return JsonResponse({
+                'username': user.username,
+            })
+        else:
+            return HttpResponseForbidden()
