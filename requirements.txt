@@ -1,5 +1,5 @@
 Django==1.11.20
-django-cors-headers==2.5.2
+django-cors-headers==3.7.0
 # django-fancybox==0.1.4
 django-groupadmin-users==0.3.3
 # django-import-export==0.6.0
