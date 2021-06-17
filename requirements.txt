@@ -12,4 +12,4 @@ django-request-logging==0.5.5
 # djangorestframework==3.6.4
 # drf-ujson==1.2
 # easy-thumbnails==2.5
-psycopg2==2.7.7
+psycopg2==2.9.1
